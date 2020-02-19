@@ -1,0 +1,156 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment
+{
+
+    abstract class Vehicle //General class
+    {
+        protected Engine Engine_;
+        protected AC AC_;
+        public Vehicle(Engine E, AC A)
+        {
+            this.Engine_ = E;
+            this.AC_ = A;
+
+        }
+        public Vehicle(Engine E)
+        {
+            this.Engine_ = E;
+        }
+        abstract public void display();
+        public void display(drive Dr)
+        {
+            Dr.timing();
+        }
+
+    }
+    class LandVehicle : Vehicle
+    {
+        private int model;
+        public LandVehicle(Engine Engine_2, AC AC_2, int model_1) : base(Engine_2, AC_2)
+        {
+            this.model = model_1;
+        }
+        public override void display()
+        {
+            Console.WriteLine("Number of engine in car :" + Engine_);
+            Console.WriteLine("Number of ac in car: " + AC_);
+        }
+
+
+    }
+    class othervehicle : Vehicle
+    {
+        private string Name;
+        public othervehicle(Engine Engine_3, AC AC_3, string Name) : base(Engine_3, AC_3)
+        {
+
+            this.Name = Name;
+        }
+        public override void display() //override method 
+        {
+            Console.WriteLine("Number of engine in car :" + Engine_);
+            Console.WriteLine("Number of ac in car: " + AC_);
+        }
+    }
+
+    class Engine
+    {
+        protected int Total_Engine;
+        public Engine(int num)
+        {
+            this.Total_Engine = num;
+        }
+        public void display()
+        {
+            Console.WriteLine("The number of Engine : " + Total_Engine);
+        }
+
+    }
+    class AC
+    {
+        protected int Total_Ac;
+        public AC(int no)
+        {
+            this.Total_Ac = no;
+        }
+        public void display()
+        {
+            Console.WriteLine("The number of AC : " + Total_Ac);
+        }
+    }
+
+
+    public class drive
+    {
+        protected string drive_slot;
+
+        public drive(string slot)
+        {
+            this.drive_slot = slot;
+        }
+        public virtual void timing()
+        {
+            Console.WriteLine("The slot of driving is : " + drive_slot);
+        }
+
+    }
+    class trip : drive
+    {
+        public string drive_slots;
+        private int trips;
+        public trip(string driving_slot, int tr) : base(driving_slot)
+        {
+            this.trips = tr;
+        }
+        public override void timing()
+        {
+            Console.WriteLine("The slot of driving is : " + drive_slot);
+            Console.WriteLine("The Complete trips are  : " + trips);
+        }
+
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Engine Eng_1 = new Engine(2200);
+
+            AC AC_1 = new AC(1100);
+
+            LandVehicle Veh1 = new LandVehicle(Eng_1, AC_1, 321);
+
+            trip Trip = new trip("Noon", 003);
+            drive driver = new drive("Evening");
+            Veh1.display();
+            Veh1.display(driver);
+            driver.timing();
+            Trip.timing();
+            Eng_1.display();
+            AC_1.display();
+
+
+            Console.WriteLine("\n ---other one--\n");
+            Engine Engine_2 = new Engine(0011);
+            AC AC_2 = new AC(0022);
+            othervehicle Vehicle_2 = new othervehicle(Engine_2, AC_2, "honda Civic");
+            trip Trip_2 = new trip("Noon", 0033);
+            drive driver_2 = new drive("Evening");
+            Vehicle_2.display();
+            Vehicle_2.display(driver_2);
+            driver_2.timing();
+            Trip_2.timing();
+            Engine_2.display();
+            AC_2.display();
+            Console.ReadLine();
+
+
+
+        }
+    }
+}
